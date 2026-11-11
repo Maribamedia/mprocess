@@ -8,6 +8,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%230A0F1C'/%3E%3Cstop offset='100%25' stop-color='%232563EB'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='10' y='10' width='34' height='34' rx='4' fill='url(%23g)' /%3E%3Crect x='56' y='10' width='34' height='34' rx='4' fill='url(%23g)' opacity='0.55' /%3E%3Crect x='10' y='56' width='34' height='34' rx='4' fill='url(%23g)' opacity='0.55' /%3E%3Crect x='56' y='56' width='34' height='34' rx='4' fill='url(%23g)' /%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://www.google.com" />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     /* ============================================================
@@ -773,6 +774,300 @@
     }
 
     /* ============================================================
+       TEAM
+    ============================================================ */
+    .team-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+    .team-card {
+      background: var(--paper-2);
+      padding: 40px 36px 44px;
+      display: flex;
+      flex-direction: column;
+    }
+    .team-card .avatar-lg {
+      width: 80px;
+      height: 80px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--dark), var(--blue));
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-family: var(--mono);
+      font-size: 20px;
+      letter-spacing: .05em;
+      margin-bottom: 22px;
+    }
+    .team-card h3 { font-family: var(--serif); font-weight: 400; font-size: 30px; line-height: 1.1; margin: 0 0 4px; }
+    .team-card .role { font-size: 14px; color: var(--blue); font-weight: 500; margin-bottom: 16px; }
+    .team-card p { font-size: 15px; line-height: 1.65; color: var(--sub); margin: 0 0 20px; }
+    .team-card .social-links { display: flex; gap: 16px; font-size: 14px; flex-wrap: wrap; }
+    .team-card .social-links a { color: var(--sub); transition: color .15s; }
+    .team-card .social-links a:hover { color: var(--blue); }
+
+    /* ============================================================
+       SHOWCASE
+    ============================================================ */
+    .logo-thumb {
+      position: relative;
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      display: grid;
+      place-items: center;
+      margin-bottom: 20px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .logo-thumb img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      position: relative;
+      z-index: 2;
+    }
+    .logo-thumb.is-fallback::after {
+      content: attr(data-fallback);
+      font-family: var(--tight);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--blue);
+      letter-spacing: .04em;
+      text-align: center;
+      line-height: 1;
+      padding: 4px;
+      text-transform: uppercase;
+    }
+
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+    .showcase-card {
+      background: var(--paper-2);
+      padding: 30px 28px 34px;
+      display: flex;
+      flex-direction: column;
+      transition: background .2s;
+    }
+    .showcase-card:hover { background: var(--paper); }
+    .showcase-card h3 { font-family: var(--serif); font-weight: 400; font-size: 24px; line-height: 1.1; margin: 0 0 8px; }
+    .showcase-card p { font-size: 14px; line-height: 1.55; color: var(--sub); margin: 0 0 18px; flex: 1; }
+    .showcase-card .link { font-size: 14px; font-weight: 500; color: var(--ink); display: inline-flex; align-items: center; gap: 6px; transition: gap .2s, color .2s; }
+    .showcase-card .link:hover { gap: 10px; color: var(--blue); }
+    .showcase-card .tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 10px;
+    }
+
+    /* ============================================================
+       PARTNERS
+    ============================================================ */
+    .partner-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+    .partner-card {
+      background: var(--paper-2);
+      padding: 30px 28px 34px;
+      display: flex;
+      flex-direction: column;
+    }
+    .partner-card h3 { font-family: var(--serif); font-weight: 400; font-size: 22px; line-height: 1.15; margin: 0 0 8px; }
+    .partner-card p { font-size: 14px; line-height: 1.55; color: var(--sub); margin: 0 0 18px; flex: 1; }
+    .partner-card .link { font-size: 13px; font-weight: 500; color: var(--blue); transition: color .15s; }
+    .partner-card .link:hover { color: var(--navy); }
+
+    /* ============================================================
+       SOCIAL & VIDEO
+    ============================================================ */
+    .social-embed-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 32px;
+    }
+    .social-embed {
+      background: var(--paper-2);
+      border: 1px solid var(--rule);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+    }
+    .social-embed .label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+    .social-embed h4 { font-family: var(--serif); font-weight: 400; font-size: 22px; margin: 0 0 8px; }
+    .social-embed p { font-size: 14px; color: var(--sub); margin: 0 0 18px; line-height: 1.55; }
+
+    .video-card {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(37,99,235,.55), transparent 60%),
+        radial-gradient(circle at 80% 70%, rgba(11,31,58,.95), transparent 60%),
+        linear-gradient(135deg, #0B1F3A 0%, #2563EB 100%);
+      display: grid;
+      place-items: center;
+      text-decoration: none;
+      border: 1px solid var(--rule);
+      transition: transform .2s;
+    }
+    .video-card:hover { transform: translateY(-2px); }
+    .video-card .play-btn {
+      width: 64px;
+      height: 64px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.95);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,.35);
+      transition: transform .2s;
+    }
+    .video-card:hover .play-btn { transform: scale(1.08); }
+    .video-card .play-btn::after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 12px 0 12px 20px;
+      border-color: transparent transparent transparent var(--navy);
+      margin-left: 4px;
+    }
+    .video-card .channel-tag {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #fff;
+      text-shadow: 0 1px 4px rgba(0,0,0,.6);
+    }
+    .video-card .channel-tag .yt-logo {
+      font-family: var(--tight);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: -.01em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .video-card .channel-tag .yt-logo::before {
+      content: "";
+      width: 22px;
+      height: 15px;
+      background: #FF0000;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    .profile-card {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      padding: 18px;
+      border-radius: 10px;
+      border: 1px solid var(--rule);
+      background: var(--paper);
+    }
+    .profile-card .pc-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 500;
+      color: #fff;
+      flex-shrink: 0;
+      letter-spacing: .02em;
+    }
+    .profile-card.linkedin .pc-avatar { background: #0A66C2; }
+    .profile-card.facebook .pc-avatar { background: #1877F2; }
+    .profile-card .pc-info { flex: 1; min-width: 0; }
+    .profile-card .pc-name { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+    .profile-card .pc-role { font-size: 12px; color: var(--sub); }
+    .profile-card .pc-link {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .45rem .9rem;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      white-space: nowrap;
+      transition: background .2s;
+    }
+    .profile-card .pc-link:hover { background: var(--blue); }
+
+    .funding-cta-box {
+      padding: 22px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      justify-content: center;
+      min-height: 140px;
+    }
+    .funding-cta-box .fc-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1.15;
+    }
+    .funding-cta-box .fc-sub { font-size: 13px; opacity: .85; line-height: 1.5; }
+    .funding-cta-box .fc-btn {
+      align-self: flex-start;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .55rem 1rem;
+      border-radius: 999px;
+      background: #fff;
+      color: var(--navy);
+      margin-top: 4px;
+      transition: transform .15s;
+    }
+    .funding-cta-box .fc-btn:hover { transform: translateY(-1px); }
+
+    /* ============================================================
        FAQ
     ============================================================ */
     .faq-list { max-width: 780px; margin: 0 auto; }
@@ -917,6 +1212,10 @@
       .guarantee-grid { grid-template-columns: 1fr; }
       .hero-row { grid-template-columns: 1fr; gap: 28px; }
       .hero-links { justify-content: flex-start; }
+      .team-grid { grid-template-columns: 1fr; }
+      .showcase-grid { grid-template-columns: repeat(2, 1fr); }
+      .partner-grid { grid-template-columns: repeat(2, 1fr); }
+      .social-embed-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 860px) {
@@ -938,6 +1237,9 @@
       .results-grid { grid-template-columns: 1fr; }
       .verticals-wall { grid-template-columns: 1fr; }
       .guarantee-section { padding: 76px 0; }
+      .team-grid { grid-template-columns: 1fr; }
+      .showcase-grid { grid-template-columns: 1fr; }
+      .partner-grid { grid-template-columns: 1fr; }
 
       .mobile-toggle { display: grid; }
       .sticky-cta { display: block; }
@@ -959,6 +1261,9 @@
       .vertical { padding-left: 20px; padding-right: 20px; }
       .result-card { padding-left: 20px; padding-right: 20px; }
       .guarantee-card { padding-left: 20px; padding-right: 20px; }
+      .team-card, .showcase-card, .partner-card { padding-left: 20px; padding-right: 20px; }
+      .profile-card { flex-direction: column; text-align: center; }
+      .profile-card .pc-link { align-self: stretch; text-align: center; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -989,6 +1294,8 @@
         <a href="#memo" class="u">Memo</a>
         <a href="#guarantee" class="u">Guarantee</a>
         <a href="#verticals" class="u">Verticals</a>
+        <a href="#showcase" class="u">Showcase</a>
+        <a href="#partners" class="u">Partners</a>
         <a href="#results" class="u">Results</a>
         <a class="button-outline" href="mailto:victor@maribaprocess.com?subject=Introduction%20enquiry">Tell Us What You Need</a>
         <button class="mobile-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">☰</button>
@@ -1001,6 +1308,9 @@
       <a href="#how" style="display:block; padding: 12px 0; font-size: 15px; border-bottom: 1px solid var(--rule-2);">How We Route</a>
       <a href="#guarantee" style="display:block; padding: 12px 0; font-size: 15px; border-bottom: 1px solid var(--rule-2);">The Guarantee</a>
       <a href="#terms" style="display:block; padding: 12px 0; font-size: 15px; border-bottom: 1px solid var(--rule-2);">Terms</a>
+      <a href="#showcase" style="display:block; padding: 12px 0; font-size: 15px; border-bottom: 1px solid var(--rule-2);">Showcase</a>
+      <a href="#partners" style="display:block; padding: 12px 0; font-size: 15px; border-bottom: 1px solid var(--rule-2);">Partners</a>
+      <a href="#social" style="display:block; padding: 12px 0; font-size: 15px; border-bottom: 1px solid var(--rule-2);">Social</a>
       <a href="#results" style="display:block; padding: 12px 0; font-size: 15px; border-bottom: 1px solid var(--rule-2);">Results</a>
       <a href="#faq" style="display:block; padding: 12px 0; font-size: 15px; border-bottom: 1px solid var(--rule-2);">FAQ</a>
       <a class="button-fill" href="mailto:victor@maribaprocess.com?subject=Introduction%20enquiry" style="width:100%; justify-content:center; margin-top:16px;">Tell Us What You Need</a>
@@ -1298,6 +1608,303 @@
     </section>
 
     <!-- ============================================================
+         TEAM
+    ============================================================ -->
+    <section id="team" style="background:var(--paper-2); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow accent">The People Behind the Routing</span>
+          <h2 class="t">A team built on research, reputation and direct access.</h2>
+          <p class="lede">Mariba Process is led by operators who understand what it takes to route capital, talent and supply across borders. Our network is personal, our research is rigorous, and our reputation is built on routing decisions that convert.</p>
+        </div>
+        <div class="team-grid reveal">
+          <div class="team-card">
+            <div class="avatar-lg">TM</div>
+            <h3>Tebogo Mariba</h3>
+            <div class="role">Founder &amp; Connection Architect</div>
+            <p>Tebogo founded Mariba Process to close the gap between live demand signals and compliant capacity. With a background spanning media, enterprise training and commercial finance, he curates every routing decision personally — ensuring that each introduction is researched, filtered and outcome-driven.</p>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/tebogo-mariba-466960330/" target="_blank" rel="noopener">LinkedIn →</a>
+              <a href="https://www.youtube.com/@TV-Mariba" target="_blank" rel="noopener">YouTube →</a>
+              <a href="https://web.facebook.com/tebogo.tatpurusha/" target="_blank" rel="noopener">Facebook →</a>
+            </div>
+          </div>
+          <div class="team-card">
+            <div class="avatar-lg">MP</div>
+            <h3>Mariba Process Network</h3>
+            <div class="role">Specialist Partners &amp; Advisors</div>
+            <p>Behind every successful route is a network of vetted specialists — funders, EPCs, legal advisors, compliance officers and technical consultants. Each partner holds an exclusive mandate in their field and is selected for track record, capacity to execute and client-first delivery. We route your requirement to the partner with the exact mandate to solve it.</p>
+            <div class="social-links">
+              <a href="#partners">View Partner Network →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SHOWCASE
+    ============================================================ -->
+    <section id="showcase">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow accent">Our Work &amp; Brands</span>
+          <h2 class="t">A portfolio built across finance, energy, wellness and digital infrastructure.</h2>
+          <p class="lede">Mariba Process's reach extends beyond routing. We build, operate and partner on platforms that deliver measurable outcomes — from residential solar and C&amp;I funding to U.S. emergency services and tax-advantaged employee benefits. Here is a selection of the brands and projects we have helped bring to life.</p>
+        </div>
+        <div class="showcase-grid reveal">
+
+          <div class="showcase-card">
+            <div class="logo-thumb" data-fallback="SC">
+              <img src="https://www.google.com/s2/favicons?domain=solar.maribamedia.co.za&sz=128" alt="Solar Connector logo" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('is-fallback'); this.remove();" />
+            </div>
+            <span class="tag">Energy · Residential</span>
+            <h3>Solar Connector — Residential</h3>
+            <p>Bespoke residential energy-as-a-service. Design, installation, funding and ongoing care for South African homeowners. 100% bespoke, nationwide coverage, 25-year warranty backing.</p>
+            <a class="link" href="https://solar.maribamedia.co.za" target="_blank" rel="noopener">Visit Solar Connector →</a>
+          </div>
+
+          <div class="showcase-card">
+            <div class="logo-thumb" data-fallback="C&amp;I">
+              <img src="https://www.google.com/s2/favicons?domain=commercial.maribamedia.co.za&sz=128" alt="Solar Connector C&amp;I logo" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('is-fallback'); this.remove();" />
+            </div>
+            <span class="tag">Energy · Commercial</span>
+            <h3>Solar Connector — Commercial &amp; Industrial</h3>
+            <p>Bespoke capital for C&amp;I solar EPCs. PPA structuring, asset finance, EPC compliance and blended capital for projects across South Africa. R2B+ funding pipeline.</p>
+            <a class="link" href="https://commercial.maribamedia.co.za" target="_blank" rel="noopener">Visit Solar Connector C&amp;I →</a>
+          </div>
+
+          <div class="showcase-card">
+            <div class="logo-thumb" data-fallback="HC">
+              <img src="https://www.google.com/s2/favicons?domain=homeconnector.us&sz=128" alt="HomeConnector logo" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('is-fallback'); this.remove();" />
+            </div>
+            <span class="tag">Emergency Services · U.S.</span>
+            <h3>HomeConnector®</h3>
+            <p>24/7 emergency water damage response across the U.S. Licensed, insured and IICRC-certified local pros matched in under 60 seconds. Active leaks prioritised.</p>
+            <a class="link" href="https://homeconnector.us" target="_blank" rel="noopener">Visit HomeConnector →</a>
+          </div>
+
+          <div class="showcase-card">
+            <div class="logo-thumb" data-fallback="LSB">
+              <img src="https://www.google.com/s2/favicons?domain=finalexpense.lonestarbenefitstrust.com&sz=128" alt="Lone Star Benefits logo" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('is-fallback'); this.remove();" />
+            </div>
+            <span class="tag">Insurance · U.S.</span>
+            <h3>Lone Star Benefits — Final Expense</h3>
+            <p>Simplified-issue whole life final expense coverage for U.S. families. No medical exam, guaranteed acceptance options, benefits paid directly to beneficiaries. Coverage up to $25,000.</p>
+            <a class="link" href="https://finalexpense.lonestarbenefitstrust.com" target="_blank" rel="noopener">Visit Lone Star Benefits →</a>
+          </div>
+
+          <div class="showcase-card">
+            <div class="logo-thumb" data-fallback="OWW">
+              <img src="https://www.google.com/s2/favicons?domain=oklahomawellnessworks.org&sz=128" alt="Oklahoma Wellness Works logo" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('is-fallback'); this.remove();" />
+            </div>
+            <span class="tag">Wellness · U.S.</span>
+            <h3>Oklahoma Wellness Works</h3>
+            <p>Wellness that works for Oklahoma employers, employees and students. SIMRP plans, Remedy DPC, Octi Health AI billing and scholarship funding — lowering taxes while improving care.</p>
+            <a class="link" href="https://oklahomawellnessworks.org" target="_blank" rel="noopener">Visit Oklahoma Wellness Works →</a>
+          </div>
+
+          <div class="showcase-card">
+            <div class="logo-thumb" data-fallback="TSB">
+              <img src="https://www.google.com/s2/favicons?domain=thesuitebenefits.com&sz=128" alt="The Suite Benefits logo" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('is-fallback'); this.remove();" />
+            </div>
+            <span class="tag">Benefits · U.S.</span>
+            <h3>The Suite Benefits</h3>
+            <p>IRC §105 compliant tax strategies for U.S. employers. Turn payroll taxes into employee wellness with Purple and Blue Plans — FICA savings, better care, net-positive ROI.</p>
+            <a class="link" href="https://thesuitebenefits.com" target="_blank" rel="noopener">Visit The Suite Benefits →</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PARTNERS
+    ============================================================ -->
+    <section id="partners" style="background:var(--paper-2); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow accent">Our Partner Network</span>
+          <h2 class="t">Vetted specialists. Exclusive mandates. Direct access.</h2>
+          <p class="lede">Every partner in our network is a specialist in their field — funders, EPCs, investment banks and business development engines. We connect your requirement to the partner whose mandate fits, and we step out of the way. Here are some of the partners we work with.</p>
+        </div>
+        <div class="partner-grid reveal">
+
+          <div class="partner-card">
+            <div class="logo-thumb" data-fallback="AAA">
+              <img src="https://www.google.com/s2/favicons?domain=aaaconsortium.co.za&sz=128" alt="AAA Consortium logo" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('is-fallback'); this.remove();" />
+            </div>
+            <h3>AAA Consortium</h3>
+            <p>Funding for suppliers to government and business. Purchase order funding from R250,000 to R10 million. Your credit score is not the deciding factor.</p>
+            <a class="link" href="https://aaaconsortium.co.za/" target="_blank" rel="noopener">aaaconsortium.co.za →</a>
+          </div>
+
+          <div class="partner-card">
+            <div class="logo-thumb" data-fallback="AFG">
+              <img src="https://www.google.com/s2/favicons?domain=afg.africa&sz=128" alt="Alternative Finance Group logo" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('is-fallback'); this.remove();" />
+            </div>
+            <h3>Alternative Finance Group (AFG)</h3>
+            <p>Flexible business funding with custom deal structuring. 1,295+ businesses supported and R2.3 billion+ funded. No hidden costs, client-first approach.</p>
+            <a class="link" href="https://afg.africa/" target="_blank" rel="noopener">afg.africa →</a>
+          </div>
+
+          <div class="partner-card">
+            <div class="logo-thumb" data-fallback="SF">
+              <img src="https://www.google.com/s2/favicons?domain=sourcefin.co.za&sz=128" alt="Sourcefin logo" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('is-fallback'); this.remove();" />
+            </div>
+            <h3>Sourcefin</h3>
+            <p>Trusted SMME funding partner. Purchase order, invoice and tender funding. R3 billion+ deployed to 2,000+ SMMEs. Term sheets in 24–48 hours.</p>
+            <a class="link" href="https://www.sourcefin.co.za/" target="_blank" rel="noopener">sourcefin.co.za →</a>
+          </div>
+
+          <div class="partner-card">
+            <div class="logo-thumb" data-fallback="BLC">
+              <img src="https://www.google.com/s2/favicons?domain=biglinkconsulting.co.za&sz=128" alt="Big Link Consulting logo" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('is-fallback'); this.remove();" />
+            </div>
+            <h3>Big Link Consulting</h3>
+            <p>Structured business development for B2B teams. Consistent deal flow, curated connections and pipeline generation across sectors.</p>
+            <a class="link" href="https://biglinkconsulting.co.za/" target="_blank" rel="noopener">biglinkconsulting.co.za →</a>
+          </div>
+
+          <div class="partner-card">
+            <div class="logo-thumb" data-fallback="PF">
+              <img src="https://www.google.com/s2/favicons?domain=pollenfinance.co.za&sz=128" alt="Pollen Finance logo" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('is-fallback'); this.remove();" />
+            </div>
+            <h3>Pollen Finance</h3>
+            <p>Funding business opportunities since 2015. Stock, equipment, contracts and cash flow funding. Decisions made by people, transparent agreements.</p>
+            <a class="link" href="https://www.pollenfinance.co.za/" target="_blank" rel="noopener">pollenfinance.co.za →</a>
+          </div>
+
+          <div class="partner-card">
+            <div class="logo-thumb" data-fallback="NCP">
+              <img src="https://www.google.com/s2/favicons?domain=novacapitalpartners.com&sz=128" alt="Nova Capital Partners logo" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('is-fallback'); this.remove();" />
+            </div>
+            <h3>Nova Capital Partners</h3>
+            <p>Pan-African investment bank. Offices in Johannesburg and Nairobi. Debt and equity capital formation, M&amp;A advisory and corporate finance across Africa.</p>
+            <a class="link" href="http://www.novacapitalpartners.com/africa.html" target="_blank" rel="noopener">novacapitalpartners.com →</a>
+          </div>
+
+          <div class="partner-card">
+            <div class="logo-thumb" data-fallback="BR">
+              <img src="https://www.google.com/s2/favicons?domain=bridgement.com&sz=128" alt="Bridgement logo" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('is-fallback'); this.remove();" />
+            </div>
+            <h3>Bridgement</h3>
+            <p>Business funding, simplified. Business loans, lines of credit and invoice finance. Apply in 2 minutes, approval in hours, funds within 24 hours.</p>
+            <a class="link" href="https://www.bridgement.com/" target="_blank" rel="noopener">bridgement.com →</a>
+          </div>
+
+          <div class="partner-card">
+            <div class="logo-thumb" data-fallback="KZ">
+              <img src="https://www.google.com/s2/favicons?domain=katzenbar.co.uk&sz=128" alt="Katzenbar logo" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('is-fallback'); this.remove();" />
+            </div>
+            <h3>Katzenbar Limited</h3>
+            <p>International funding and business solutions. Equity investors, loan funding, trade finance, SBLCs and monetisation — from US$50k to US$200m+.</p>
+            <a class="link" href="https://katzenbar.co.uk/" target="_blank" rel="noopener">katzenbar.co.uk →</a>
+          </div>
+
+          <div class="partner-card">
+            <div class="logo-thumb" data-fallback="UHS">
+              <img src="https://www.google.com/s2/favicons?domain=urbanholdingssolar.co.za&sz=128" alt="Urban Holdings Solar logo" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('is-fallback'); this.remove();" />
+            </div>
+            <h3>Urban Holdings Solar</h3>
+            <p>Commercial, residential and agricultural solar solutions. Save up to 70% on energy costs. Fully funded, risk-free solar in partnership with Jaltech.</p>
+            <a class="link" href="https://urbanholdingssolar.co.za/" target="_blank" rel="noopener">urbanholdingssolar.co.za →</a>
+          </div>
+
+          <div class="partner-card">
+            <div class="logo-thumb" data-fallback="JT">
+              <img src="https://www.google.com/s2/favicons?domain=jaltech.co.za&sz=128" alt="Jaltech logo" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('is-fallback'); this.remove();" />
+            </div>
+            <h3>Jaltech</h3>
+            <p>Alternative investment specialists. Funded over 250 solar systems and R2 billion+ in Section 12B solar investments. Transparent, regulated alternative investments.</p>
+            <a class="link" href="https://jaltech.co.za/" target="_blank" rel="noopener">jaltech.co.za →</a>
+          </div>
+
+          <div class="partner-card">
+            <div class="logo-thumb" data-fallback="DS">
+              <img src="https://www.google.com/s2/favicons?domain=dragonsolar.co.za&sz=128" alt="Dragon Solar logo" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('is-fallback'); this.remove();" />
+            </div>
+            <h3>Dragon Solar</h3>
+            <p>Residential energy-as-a-service. Bespoke solar infrastructure designed for how you live. Design, installation, funding and ongoing care.</p>
+            <a class="link" href="https://dragonsolar.co.za/" target="_blank" rel="noopener">dragonsolar.co.za →</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SOCIAL & VIDEO
+    ============================================================ -->
+    <section id="social">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow accent">Connect With Us</span>
+          <h2 class="t">Follow the conversation. Watch the work. Join the network.</h2>
+          <p class="lede">Mariba Process shares insights, routing updates and partner stories across LinkedIn, YouTube and Facebook. Subscribe, follow and reach out directly — the conversation is open.</p>
+        </div>
+        <div class="social-embed-grid reveal">
+
+          <div class="social-embed">
+            <div class="label">YouTube · @TV-Mariba</div>
+            <h4>TV-Mariba</h4>
+            <p>Project showcases, partner interviews and commentary on routing, capital and business growth. Subscribe to the channel for new episodes.</p>
+            <a class="video-card" href="https://www.youtube.com/@TV-Mariba" target="_blank" rel="noopener" aria-label="Visit TV-Mariba on YouTube">
+              <div class="play-btn" aria-hidden="true"></div>
+              <div class="channel-tag">
+                <span class="yt-logo">YouTube</span>
+                <span>@TV-Mariba</span>
+              </div>
+            </a>
+            <a class="button-fill" href="https://www.youtube.com/@TV-Mariba" target="_blank" rel="noopener" style="margin-top:16px; align-self:flex-start;">Subscribe on YouTube →</a>
+          </div>
+
+          <div class="social-embed">
+            <div class="label">LinkedIn</div>
+            <h4>Tebogo Mariba</h4>
+            <p>Founder &amp; Connection Architect, Mariba Process. Follow for insights on capital, infrastructure and curated routing across borders.</p>
+            <div class="profile-card linkedin">
+              <div class="pc-avatar">TM</div>
+              <div class="pc-info">
+                <div class="pc-name">Tebogo Mariba</div>
+                <div class="pc-role">Founder · Mariba Process</div>
+              </div>
+              <a class="pc-link" href="https://www.linkedin.com/in/tebogo-mariba-466960330/" target="_blank" rel="noopener">Connect</a>
+            </div>
+            <a class="button-fill" href="https://www.linkedin.com/in/tebogo-mariba-466960330/" target="_blank" rel="noopener" style="margin-top:16px; align-self:flex-start;">View LinkedIn Profile →</a>
+          </div>
+
+          <div class="social-embed">
+            <div class="label">Facebook</div>
+            <h4>Tebogo Tatpurusha Mariba</h4>
+            <p>Behind-the-scenes updates, partner news and direct engagement. Follow the journey on Facebook.</p>
+            <div class="profile-card facebook">
+              <div class="pc-avatar">TM</div>
+              <div class="pc-info">
+                <div class="pc-name">Tebogo Tatpurusha Mariba</div>
+                <div class="pc-role">Facebook Page</div>
+              </div>
+              <a class="pc-link" href="https://web.facebook.com/tebogo.tatpurusha/" target="_blank" rel="noopener">Follow</a>
+            </div>
+            <a class="button-fill" href="https://web.facebook.com/tebogo.tatpurusha/" target="_blank" rel="noopener" style="margin-top:16px; align-self:flex-start;">View Facebook Page →</a>
+          </div>
+
+          <div class="social-embed">
+            <div class="label">Direct Enquiry</div>
+            <h4>Tell Us What You Need</h4>
+            <p>Skip the feed and go straight to the source. Submit your requirement and we'll route it to the right counterparty — usually within 24–48 hours.</p>
+            <div class="funding-cta-box">
+              <div class="fc-title">Supply ↔ Demand, connected.</div>
+              <div class="fc-sub">Funding · Talent · Supplies · Bids · Buyers</div>
+              <a class="fc-btn" href="mailto:victor@maribaprocess.com?subject=Introduction%20enquiry">Start a Routing Enquiry →</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
          RESULTS
     ============================================================ -->
     <section id="results" style="background:var(--paper-2); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);">
@@ -1500,6 +2107,9 @@
           <a href="#how">How We Route</a><span class="dot">·</span>
           <a href="#guarantee">The Guarantee</a><span class="dot">·</span>
           <a href="#terms">Terms</a><span class="dot">·</span>
+          <a href="#showcase">Showcase</a><span class="dot">·</span>
+          <a href="#partners">Partners</a><span class="dot">·</span>
+          <a href="#social">Social</a><span class="dot">·</span>
           <a href="#results">Results</a><span class="dot">·</span>
           <a href="#faq">FAQ</a><span class="dot">·</span>
           <a href="mailto:victor@maribaprocess.com">victor@maribaprocess.com</a>
