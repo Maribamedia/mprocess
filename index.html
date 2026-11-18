@@ -21,12 +21,12 @@
       --ink-2: #1E293B;
       --sub: #475569;
       --mute: #64748B;
-      --dark: #0B0F14;
-      --dark-2: #11161D;
       --navy: #0B1F3A;
       --blue: #2563EB;
       --blue-bright: #3B82F6;
       --blue-soft: rgba(37, 99, 235, 0.12);
+      --blue-tint: #EEF3FE;
+      --blue-tint-2: #E4EDFD;
       --rule: #E3DCD2;
       --rule-2: #ECE9E0;
       --green: #16A34A;
@@ -68,7 +68,6 @@
       color: var(--sub);
     }
     .eyebrow.accent { color: var(--blue); }
-    .eyebrow.on-dark { color: var(--blue-bright); }
 
     h1, h2, h3, h4 { font-family: var(--serif); font-weight: 400; letter-spacing: -.012em; }
     h2.t { font-size: clamp(38px, 4.4vw, 58px); line-height: 1.02; margin: 0 0 20px; }
@@ -206,26 +205,61 @@
     }
 
     /* ============================================================
-       HERO
+       HERO — light, animated, editorial
     ============================================================ */
     .hero {
-      background: var(--dark);
-      color: #fff;
-      padding: 112px 0 0;
-      border-bottom: 1px solid #1E293B;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, #FFFFFF 0%, var(--paper) 62%, #F1F4FA 100%);
+      color: var(--ink);
+      padding: 104px 0 0;
+      border-bottom: 1px solid var(--rule);
     }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 82% 8%, rgba(37,99,235,.13), transparent 42%),
+        radial-gradient(circle at 8% 88%, rgba(37,99,235,.08), transparent 46%);
+      animation: heroGlow 16s ease-in-out infinite alternate;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+      opacity: .55;
+      animation: heroLine 8s ease-in-out infinite;
+    }
+    .hero .wrap { position: relative; z-index: 1; }
+
+    @keyframes heroGlow {
+      from { transform: translate3d(0,0,0) scale(1); opacity: .9; }
+      to   { transform: translate3d(-18px, 14px, 0) scale(1.06); opacity: 1; }
+    }
+    @keyframes heroLine {
+      0%, 100% { opacity: .25; }
+      50% { opacity: .8; }
+    }
+
     .hero .memo-line {
       font-family: var(--mono);
       font-size: 10px;
       letter-spacing: .14em;
       text-transform: uppercase;
-      color: rgba(255,255,255,.4);
+      color: var(--mute);
       margin-bottom: 34px;
       display: flex;
       flex-wrap: wrap;
       gap: 12px 28px;
+      animation: fadeUp .8s .05s ease both;
     }
-    .hero .memo-line span { color: rgba(255,255,255,.55); }
+    .hero .memo-line span { color: var(--sub); }
+    .hero .memo-line span:first-child { color: var(--blue); }
+
     .hero h1 {
       font-family: var(--serif);
       font-weight: 400;
@@ -234,9 +268,11 @@
       line-height: .95;
       letter-spacing: -.018em;
       max-width: 1100px;
-      color: #fff;
+      color: var(--ink);
+      animation: fadeUp .95s .12s ease both;
     }
-    .hero h1 i { font-style: italic; color: var(--blue-bright); }
+    .hero h1 i { font-style: italic; color: var(--blue); }
+
     .hero-row {
       display: grid;
       grid-template-columns: 1.1fr .9fr;
@@ -246,9 +282,10 @@
     .hero p {
       font-size: 20px;
       line-height: 1.5;
-      color: rgba(255,255,255,.62);
+      color: var(--sub);
       max-width: 54ch;
       margin: 0;
+      animation: fadeUp .95s .26s ease both;
     }
     .hero-links {
       display: flex;
@@ -257,9 +294,10 @@
       font-size: 15px;
       font-weight: 500;
       flex-wrap: wrap;
+      animation: fadeUp .95s .38s ease both;
     }
-    .hero-links a { color: rgba(255,255,255,.7); }
-    .hero-links a:hover { color: #fff; }
+    .hero-links a { color: var(--sub); transition: color .15s; }
+    .hero-links a:hover { color: var(--blue); }
 
     .strip {
       list-style: none;
@@ -267,15 +305,20 @@
       padding: 0;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      border-top: 1px solid rgba(255,255,255,.1);
+      border-top: 1px solid var(--rule);
     }
     .strip li {
       padding: 26px 26px 30px 0;
       display: flex;
       flex-direction: column;
       gap: 6px;
+      animation: fadeUp .8s ease both;
     }
-    .strip li + li { border-left: 1px solid rgba(255,255,255,.1); padding-left: 26px; }
+    .strip li:nth-child(1) { animation-delay: .50s; }
+    .strip li:nth-child(2) { animation-delay: .58s; }
+    .strip li:nth-child(3) { animation-delay: .66s; }
+    .strip li:nth-child(4) { animation-delay: .74s; }
+    .strip li + li { border-left: 1px solid var(--rule); padding-left: 26px; }
     .strip .fig {
       font-family: var(--tight);
       font-weight: 600;
@@ -283,9 +326,14 @@
       line-height: 1;
       letter-spacing: -.03em;
       font-variant-numeric: tabular-nums;
-      color: #fff;
+      color: var(--ink);
     }
-    .strip .cap { font-size: 13px; color: rgba(255,255,255,.42); line-height: 1.4; }
+    .strip .cap { font-size: 13px; color: var(--sub); line-height: 1.4; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
     /* ============================================================
        THEATRE STRIP
@@ -434,7 +482,9 @@
       padding: 34px 30px 38px;
       display: flex;
       flex-direction: column;
+      transition: background .2s;
     }
+    .route-card:hover { background: var(--paper); }
     .route-card .num {
       font-family: var(--mono);
       font-size: 11px;
@@ -521,6 +571,7 @@
       letter-spacing: .12em;
       text-transform: uppercase;
       color: var(--sub);
+      text-align: center;
     }
     .vertical-note .vn-line {
       display: block;
@@ -567,16 +618,17 @@
     }
 
     /* ============================================================
-       GUARANTEE — dark band
+       GUARANTEE — light blue band
     ============================================================ */
     .guarantee-section {
-      background: var(--dark);
-      color: #fff;
+      background: linear-gradient(180deg, var(--blue-tint) 0%, var(--blue-tint-2) 100%);
+      color: var(--ink);
       padding: 104px 0;
-      border-bottom: 1px solid #1E293B;
+      border-bottom: 1px solid var(--rule);
+      border-top: 1px solid var(--rule);
     }
     .guarantee-inner { max-width: 980px; margin: 0 auto; }
-    .guarantee-section .eyebrow { color: var(--blue-bright); display: block; margin-bottom: 20px; }
+    .guarantee-section .eyebrow { color: var(--blue); display: block; margin-bottom: 20px; }
     .guarantee-head {
       font-family: var(--serif);
       font-weight: 400;
@@ -584,13 +636,13 @@
       line-height: 1.04;
       letter-spacing: -.018em;
       margin: 0 0 20px;
-      color: #fff;
+      color: var(--ink);
     }
-    .guarantee-head i { font-style: italic; color: var(--blue-bright); }
+    .guarantee-head i { font-style: italic; color: var(--blue); }
     .guarantee-lede {
       font-size: 19px;
       line-height: 1.55;
-      color: rgba(255,255,255,.62);
+      color: var(--sub);
       max-width: 64ch;
       margin: 0 0 44px;
     }
@@ -598,19 +650,21 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1px;
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(37,99,235,.18);
+      border: 1px solid rgba(37,99,235,.18);
     }
     .guarantee-card {
-      background: var(--dark);
+      background: var(--paper-2);
       padding: 32px 28px 36px;
+      transition: background .2s;
     }
+    .guarantee-card:hover { background: #FBFCFE; }
     .guarantee-card .g-label {
       font-family: var(--mono);
       font-size: 10px;
       letter-spacing: .14em;
       text-transform: uppercase;
-      color: var(--blue-bright);
+      color: var(--blue);
       display: block;
       margin-bottom: 14px;
     }
@@ -620,12 +674,12 @@
       font-size: 26px;
       line-height: 1.1;
       margin: 0 0 10px;
-      color: #fff;
+      color: var(--ink);
     }
     .guarantee-card p {
       font-size: 15px;
       line-height: 1.65;
-      color: rgba(255,255,255,.55);
+      color: var(--sub);
       margin: 0;
     }
     .guarantee-note {
@@ -634,7 +688,7 @@
       font-size: 10px;
       letter-spacing: .1em;
       text-transform: uppercase;
-      color: rgba(255,255,255,.38);
+      color: var(--mute);
       line-height: 1.7;
     }
 
@@ -793,7 +847,7 @@
       width: 80px;
       height: 80px;
       border-radius: 999px;
-      background: linear-gradient(135deg, var(--dark), var(--blue));
+      background: linear-gradient(135deg, var(--navy), var(--blue));
       color: #fff;
       display: grid;
       place-items: center;
@@ -889,7 +943,9 @@
       padding: 30px 28px 34px;
       display: flex;
       flex-direction: column;
+      transition: background .2s;
     }
+    .partner-card:hover { background: var(--paper); }
     .partner-card h3 { font-family: var(--serif); font-weight: 400; font-size: 22px; line-height: 1.15; margin: 0 0 8px; }
     .partner-card p { font-size: 14px; line-height: 1.55; color: var(--sub); margin: 0 0 18px; flex: 1; }
     .partner-card .link { font-size: 13px; font-weight: 500; color: var(--blue); transition: color .15s; }
@@ -1098,22 +1154,24 @@
       transition: max-height .4s ease, padding .4s ease;
       padding: 0;
     }
-    .faq-item.active .faq-a { max-height: 520px; padding: 0 0 24px; }
+    .faq-item.active .faq-a { max-height: 620px; padding: 0 0 24px; }
     .faq-a p { font-size: 15px; line-height: 1.7; color: var(--sub); margin: 0; }
     .faq-a a { color: var(--blue); font-weight: 600; }
 
     /* ============================================================
-       CTA
+       CTA — light, confident
     ============================================================ */
     .cta-section {
-      background: var(--dark);
-      color: #fff;
+      background: linear-gradient(180deg, var(--paper-2) 0%, var(--blue-tint) 100%);
+      color: var(--ink);
       padding: 104px 0;
       text-align: center;
+      border-top: 1px solid var(--rule);
     }
-    .cta-section .eyebrow { color: var(--blue-bright); display: block; margin-bottom: 18px; }
-    .cta-section h2 { color: #fff; margin-bottom: 16px; }
-    .cta-section p { color: rgba(255,255,255,.52); max-width: 56ch; margin: 0 auto 36px; }
+    .cta-section .eyebrow { color: var(--blue); display: block; margin-bottom: 18px; }
+    .cta-section h2 { color: var(--ink); margin-bottom: 16px; }
+    .cta-section h2 i { font-style: italic; color: var(--blue); }
+    .cta-section p { color: var(--sub); max-width: 56ch; margin: 0 auto 36px; }
     .cta-actions {
       display: flex;
       justify-content: center;
@@ -1125,7 +1183,7 @@
       font-family: var(--mono);
       font-size: 10px;
       letter-spacing: .1em;
-      color: rgba(255,255,255,.35);
+      color: var(--mute);
       line-height: 1.7;
     }
 
@@ -1220,7 +1278,7 @@
 
     @media (max-width: 860px) {
       :root { --gutter: 20px; }
-      .hero { padding: 88px 0 0; }
+      .hero { padding: 80px 0 0; }
       .hero h1 { font-size: clamp(38px, 9vw, 58px); }
       .strip { grid-template-columns: 1fr 1fr; margin-top: 44px; }
       .strip li { padding: 18px 16px 20px 0; }
@@ -1252,7 +1310,7 @@
       .hero h1 { font-size: clamp(34px, 10vw, 46px); }
       .hero p { font-size: 17px; }
       .strip { grid-template-columns: 1fr; }
-      .strip li { border-left: 0 !important; padding-left: 0 !important; border-top: 1px solid rgba(255,255,255,.1); padding-top: 16px; }
+      .strip li { border-left: 0 !important; padding-left: 0 !important; border-top: 1px solid var(--rule); padding-top: 16px; }
       .strip li:first-child { border-top: 0; padding-top: 0; }
       .section-head { margin-bottom: 32px; }
       .route-card, .step, .term-card { padding-left: 20px; padding-right: 20px; }
@@ -1274,6 +1332,7 @@
         scroll-behavior: auto !important;
       }
       html.js .reveal { opacity: 1; transform: none; }
+      .hero::before, .hero::after { animation: none; }
     }
   </style>
   <script>document.documentElement.classList.add('js');</script>
@@ -1320,7 +1379,7 @@
   <main id="top">
 
     <!-- ============================================================
-         HERO
+         HERO — light, animated
     ============================================================ -->
     <section class="hero">
       <div class="wrap">
@@ -1329,9 +1388,9 @@
           <span>A Mariba Media Company</span>
           <span>US · EU · Asia</span>
         </div>
-        <h1>We route supply to demand signals, <i>and demand to compliant supply.</i></h1>
+        <h1>We route supply to demand. <i>And demand to supply.</i></h1>
         <div class="hero-row">
-          <p>Mariba Process reads live demand signals and compliant capacity across funding, talent, supplies, bids and buyers — then routes one to the other, in both directions. Research first. Matching second. Introduction third. And we keep routing until fulfillment.</p>
+          <p>Mariba Process reads live demand and compliant capacity across funding, talent, supplies, bids and buyers — then connects them, both ways. Research. Match. Introduce. And we keep routing until fulfillment.</p>
           <div class="hero-links">
             <a class="u" href="mailto:victor@maribaprocess.com?subject=Introduction%20enquiry">Tell Us What You Need →</a>
             <a class="u" href="#results">See Results</a>
@@ -1354,7 +1413,7 @@
         <div class="theatre">
           <span class="label"><span class="dot"></span>US</span>
           <span class="region">United States</span>
-          <span class="detail">Oklahoma base. US-hours coverage for funding, talent, supply and enterprise demand mandates across North America.</span>
+          <span class="detail">Oklahoma base. US-hours coverage for funding, talent, supply and enterprise demand across North America.</span>
         </div>
         <div class="theatre">
           <span class="label"><span class="dot"></span>EU</span>
@@ -1364,7 +1423,7 @@
         <div class="theatre">
           <span class="label"><span class="dot"></span>Asia</span>
           <span class="region">Asia</span>
-          <span class="detail">Demand-side and supply-side routing across Asian buyers, suppliers, talent pools and infrastructure counterparties — with compliance screening at the point of introduction.</span>
+          <span class="detail">Demand and supply routing across Asian buyers, suppliers, talent pools and infrastructure counterparties — compliance screened before introduction.</span>
         </div>
       </div>
     </div>
@@ -1377,30 +1436,28 @@
         <div class="memo-inner">
           <div class="memo-head reveal">
             <span class="eyebrow accent">Strategic Memo · On Routing, Not Outreach</span>
-            <h2>Most B2B routing runs one way. <i>We build it both ways.</i></h2>
-            <p class="memo-lead">The market does not lack supply. It does not lack demand. It lacks a routing layer that reads both at once — and matches them through research, not volume.</p>
+            <h2>Most routing runs one way. <i>We run it both ways.</i></h2>
+            <p class="memo-lead">The market has supply. It has demand. What it lacks is a routing layer that reads both at once — and matches them through research, not volume.</p>
           </div>
 
           <div class="memo-body reveal">
-            <p>Capital, talent, supplies and demand do not find each other cleanly. Supply sits with capacity that cannot see the demand. Demand sits with requirements that cannot see the compliant capacity. Most operators pick a side — sell-side outbound, buy-side sourcing — and route in one direction only.</p>
+            <p>Capital, talent and supply rarely find each other on their own. Supply cannot see demand. Demand cannot see compliant capacity. Most operators pick a side and route one way.</p>
 
-            <p class="pullquote">The myoProcess model proved the leverage is in the introduction. <em>Our thesis is narrower: the leverage is in routing supply to demand signals, and demand to compliant supply, in the same motion.</em></p>
+            <p class="pullquote">The leverage is not in outreach. <em>It is in routing — supply to demand, and demand to compliant supply, in the same motion.</em></p>
 
-            <p>The work is not outreach. It is research — mapping who controls the decision, what their live requirement is, and what compliance constraints sit on both sides. Then it is matching: requirements to compliant capacity. Only then do we route.</p>
+            <p>So we research first: who decides, what the live requirement is, and what compliance sits on both sides. Then we match. Only then do we introduce.</p>
 
-            <p>Funding is one pillar. Talent is another. Supplies, bids and buyers are the third. All three run on the same two-way routing layer — supply to demand signals, and demand to supply signals — filtered for value, demand and compliant capacity.</p>
+            <p>Three flows — funding; talent; supplies, bids and buyers — run on one routing layer, filtered the same way.</p>
 
-            <p>Value. Does the introduction make sense for both sides, not just ours? Demand. Is the requirement live, with a decision window and a counterparty who can act? Compliant capacity. Can the supply side actually deliver — legally, operationally and at the standard the buyer expects?</p>
+            <p>Value: does it work for both sides? Demand: is the requirement live, with a counterparty who can act? Capacity: can the supply side deliver, legally and operationally? Clear all three, we route. Miss one, we do not.</p>
 
-            <p>When all three filters clear, we route the signal in whichever direction the demand sits. When one fails, we do not make the introduction. That discipline is the product.</p>
+            <p>And we do not route once and leave. In every market we operate — US, EU, Asia — supply and demand signals are there. If the first curated introduction does not land, we route again. <strong style="font-weight:600;color:var(--ink);">We keep routing until fulfillment.</strong></p>
 
-            <p>We do not route once and walk away. In every market we operate — US, EU, Asia — supply and demand signals are guaranteed to exist. If the first curated introduction does not reach fulfillment, we route again. <strong style="font-weight:600;color:var(--ink);">We keep routing until fulfillment.</strong></p>
+            <p class="pullquote">We are not a broker. Not a headhunter. Not a lead-gen agency. <em>We are a routing layer that runs both ways — and does not stop at the first introduction.</em></p>
 
-            <p class="pullquote">We are not a broker. We are not a headhunter. We are not a lead-gen agency. <em>We are a routing layer that runs in both directions — and does not stop at the first introduction.</em></p>
+            <p>From the US, EU and Asia, we read demand in one theatre and route compliant capacity from another. US mandates run on US hours from Oklahoma. EU and Asia mandates run through our cross-border desk.</p>
 
-            <p>Being across the US, EU and Asia means we can read demand signals in one theatre and route compliant capacity from another. US mandates run on US hours from Oklahoma. EU and Asia mandates run through our cross-border desk. Funding, talent, supplies, bids and buyers move across all three.</p>
-
-            <p class="close">Because in some markets, one introduction is noise. <em>In others, one introduction — routed in the right direction — changes the direction of a company.</em></p>
+            <p class="close">Because in some markets, one introduction is noise. <em>In others, one introduction — routed the right way — changes a company.</em></p>
 
             <div class="memo-sign">
               <span class="sig-name">Mariba Process</span>
@@ -1419,24 +1476,24 @@
         <div class="section-head reveal">
           <span class="eyebrow accent">What We Route</span>
           <h2 class="t">Three flows. One two-way routing layer.</h2>
-          <p class="lede">We do not treat funding, talent and supply as separate businesses. They are three flows through the same routing layer — and the value is in matching requirements to compliant capacity, in whichever direction the demand sits.</p>
+          <p class="lede">Funding, talent and supply are not separate businesses to us. They are three flows through the same routing layer — and the value is matching requirements to compliant capacity, whichever way the demand sits.</p>
         </div>
 
         <div class="route-grid reveal">
           <div class="route-card">
             <div class="num">01</div>
             <h3>Funding → Opportunity</h3>
-            <p>Funders, lenders and family offices routed to operators and projects whose mandate, risk profile and timing fit. And the inverse: operators with live funding requirements routed to the capital that can actually close.</p>
+            <p>Funders, lenders and family offices routed to operators and projects whose mandate, risk profile and timing fit. And the inverse: operators with live funding needs routed to capital that can actually close.</p>
           </div>
           <div class="route-card">
             <div class="num">02</div>
             <h3>Talent → Mandate</h3>
-            <p>Senior operators routed to boards, funds and companies hiring quietly — before the role is advertised. And the inverse: mandates routed to operators whose track record, references and timing fit.</p>
+            <p>Senior operators routed to boards, funds and companies hiring quietly — before the role is advertised. And the inverse: mandates routed to operators whose record, references and timing fit.</p>
           </div>
           <div class="route-card">
             <div class="num">03</div>
             <h3>Supply, Bids &amp; Buyers</h3>
-            <p>Compliant capacity routed to live demand signals — suppliers to buyers, bidders to tenders, vendors to enterprise procurement. And the inverse: demand routed to compliant supply, screened for capability and commercial fit before the introduction is made.</p>
+            <p>Compliant capacity routed to live demand — suppliers to buyers, bidders to tenders, vendors to enterprise procurement. And the inverse: demand routed to compliant supply, screened for capability and fit before introduction.</p>
           </div>
         </div>
       </div>
@@ -1450,7 +1507,7 @@
         <div class="section-head reveal">
           <span class="eyebrow accent">Verticals · 9+ and counting</span>
           <h2 class="t">Nine vital industries. One routing layer.</h2>
-          <p class="lede">We work where funding, talent, supply and demand intersect. These are the nine verticals where our routing layer is live today — and we add new verticals as demand emerges, not as a marketing exercise.</p>
+          <p class="lede">We work where funding, talent, supply and demand intersect. These are the nine verticals where our routing layer is live today — and we add new ones as demand emerges, not as a marketing exercise.</p>
         </div>
 
         <div class="verticals-wall reveal">
@@ -1516,8 +1573,8 @@
       <div class="wrap">
         <div class="section-head center reveal">
           <span class="eyebrow accent">How We Route</span>
-          <h2 class="t">Research first. Match second. Introduction third.</h2>
-          <p class="lede">You do not need to know who you should be meeting. That is the routing work. Tell us the requirement or the demand signal; we research the market, match requirements to compliant capacity, and route the introduction in whichever direction the demand sits.</p>
+          <h2 class="t">Research first. Match second. Introduce third.</h2>
+          <p class="lede">You do not need to know who you should be meeting. That is the routing work. Tell us the requirement or the demand signal; we research the market, match it to compliant capacity, and introduce — whichever way the demand sits.</p>
         </div>
         <div class="steps reveal">
           <div class="step">
@@ -1528,12 +1585,12 @@
           <div class="step">
             <div class="num">02</div>
             <h3>Research</h3>
-            <p>We map the market: who controls the decision, what their mandate is, whether the timing is live, and what the compliance constraints are on both sides.</p>
+            <p>We map the market: who controls the decision, what their mandate is, whether timing is live, and what compliance sits on both sides.</p>
           </div>
           <div class="step">
             <div class="num">03</div>
             <h3>Match to Compliant Capacity</h3>
-            <p>Requirements are matched to compliant capacity — funding to the mandate that fits, talent to the track record that fits, demand to the supplier who can actually deliver. If one side does not clear, we do not route.</p>
+            <p>Requirements are matched to compliant capacity — funding to the mandate that fits, talent to the record that fits, demand to the supplier who can deliver. If one side fails, we do not route.</p>
           </div>
           <div class="step">
             <div class="num">04</div>
@@ -1545,27 +1602,27 @@
     </section>
 
     <!-- ============================================================
-         GUARANTEE
+         GUARANTEE — light band
     ============================================================ -->
     <section class="guarantee-section" id="guarantee">
       <div class="wrap">
         <div class="guarantee-inner">
           <div class="reveal">
-            <span class="eyebrow on-dark">The Guarantee</span>
-            <h2 class="guarantee-head">We guarantee supply and demand signals <i>in every market we operate.</i></h2>
-            <p class="guarantee-lede">If we open a market, the signals are there — live demand and compliant capacity, both readable. That is the guarantee. What we do not guarantee is that any single introduction converts. What we do commit to is this: we keep routing curated introductions until fulfillment.</p>
+            <span class="eyebrow">The Guarantee</span>
+            <h2 class="guarantee-head">Signals in every market we operate. <i>And routing until fulfillment.</i></h2>
+            <p class="guarantee-lede">If we open a market, the signals are live — demand and compliant capacity, both readable. We do not promise any single introduction converts. We do promise we keep routing curated introductions until it does.</p>
           </div>
 
           <div class="guarantee-grid reveal">
             <div class="guarantee-card">
               <span class="g-label">Guaranteed</span>
               <h3>Signals exist.</h3>
-              <p>In every theatre we operate — US, EU, Asia — there is live demand and compliant capacity. We do not open a market we cannot read. If we take a brief, the signals are there.</p>
+              <p>In every theatre we operate — US, EU, Asia — live demand and compliant capacity are there. We do not open a market we cannot read. If we take a brief, the signals are there.</p>
             </div>
             <div class="guarantee-card">
               <span class="g-label">Committed</span>
               <h3>Routing until fulfillment.</h3>
-              <p>If the first curated introduction does not reach fulfillment, we route again — under the same agreement, at no additional fee — until the requirement is fulfilled or the brief is withdrawn.</p>
+              <p>If the first curated introduction does not land, we route again — same agreement, no extra fee — until the requirement is fulfilled or the brief is withdrawn.</p>
             </div>
           </div>
 
@@ -1589,19 +1646,19 @@
             <div class="term-num">01</div>
             <h3>Fixed Success Fee</h3>
             <p class="term-sub">Upon fulfillment</p>
-            <p>A fixed fee agreed in advance, triggered when the routed introduction reaches fulfillment. If the first route does not convert, we keep routing — under the same agreement, at no additional fee — until fulfillment. The fee is disclosed upfront and does not move after signature.</p>
+            <p>A fixed fee agreed in advance, triggered when the routed introduction reaches fulfillment. If the first route does not convert, we keep routing — same agreement, no extra fee — until it does. The fee is disclosed upfront and does not move after signature.</p>
           </div>
           <div class="term-card">
             <div class="term-num">02</div>
             <h3>Performance Retainer</h3>
             <p class="term-sub">Ongoing mandate</p>
-            <p>For counterparties who want a routing mandate on retainer. The retainer is credited against success fees. Available on demand, structured per theatre, and reviewed at each routing window. Routing-until-fulfillment applies to every brief under retainer.</p>
+            <p>For counterparties who want a routing mandate on retainer. The retainer is credited against success fees. Available on demand, structured per theatre, reviewed at each routing window. Routing-until-fulfillment applies to every brief under retainer.</p>
           </div>
           <div class="term-card">
             <div class="term-num">03</div>
             <h3>Partnership</h3>
             <p class="term-sub">Based on demand</p>
-            <p>For networks, funds and platforms that want a routing partnership across US, EU or Asia. Structurally negotiated per theatre, based on the demand profile you bring and the counterparties you need access to. Partnerships carry the same routing-until-fulfillment commitment.</p>
+            <p>For networks, funds and platforms that want a routing partnership across US, EU or Asia. Negotiated per theatre, based on the demand profile you bring and the counterparties you need. Partnerships carry the same routing-until-fulfillment commitment.</p>
           </div>
         </div>
       </div>
@@ -1615,14 +1672,14 @@
         <div class="section-head reveal">
           <span class="eyebrow accent">The People Behind the Routing</span>
           <h2 class="t">A team built on research, reputation and direct access.</h2>
-          <p class="lede">Mariba Process is led by operators who understand what it takes to route capital, talent and supply across borders. Our network is personal, our research is rigorous, and our reputation is built on routing decisions that convert.</p>
+          <p class="lede">Mariba Process is led by operators who know what it takes to route capital, talent and supply across borders. Our network is personal, our research is rigorous, and our reputation rests on routing decisions that convert.</p>
         </div>
         <div class="team-grid reveal">
           <div class="team-card">
             <div class="avatar-lg">TM</div>
             <h3>Tebogo Mariba</h3>
             <div class="role">Founder &amp; Connection Architect</div>
-            <p>Tebogo founded Mariba Process to close the gap between live demand signals and compliant capacity. With a background spanning media, enterprise training and commercial finance, he curates every routing decision personally — ensuring that each introduction is researched, filtered and outcome-driven.</p>
+            <p>Tebogo founded Mariba Process to close the gap between live demand signals and compliant capacity. With a background spanning media, enterprise training and commercial finance, he curates every routing decision personally — so each introduction is researched, filtered and outcome-driven.</p>
             <div class="social-links">
               <a href="https://www.linkedin.com/in/tebogo-mariba-466960330/" target="_blank" rel="noopener">LinkedIn →</a>
               <a href="https://www.youtube.com/@TV-Mariba" target="_blank" rel="noopener">YouTube →</a>
@@ -1633,7 +1690,7 @@
             <div class="avatar-lg">MP</div>
             <h3>Mariba Process Network</h3>
             <div class="role">Specialist Partners &amp; Advisors</div>
-            <p>Behind every successful route is a network of vetted specialists — funders, EPCs, legal advisors, compliance officers and technical consultants. Each partner holds an exclusive mandate in their field and is selected for track record, capacity to execute and client-first delivery. We route your requirement to the partner with the exact mandate to solve it.</p>
+            <p>Behind every route is a network of vetted specialists — funders, EPCs, legal advisors, compliance officers and technical consultants. Each holds an exclusive mandate in their field, chosen for track record, capacity to execute and client-first delivery. We route your requirement to the partner with the exact mandate to solve it.</p>
             <div class="social-links">
               <a href="#partners">View Partner Network →</a>
             </div>
@@ -1650,7 +1707,7 @@
         <div class="section-head reveal">
           <span class="eyebrow accent">Our Work &amp; Brands</span>
           <h2 class="t">A portfolio built across finance, energy, wellness and digital infrastructure.</h2>
-          <p class="lede">Mariba Process's reach extends beyond routing. We build, operate and partner on platforms that deliver measurable outcomes — from residential solar and C&amp;I funding to U.S. emergency services and tax-advantaged employee benefits. Here is a selection of the brands and projects we have helped bring to life.</p>
+          <p class="lede">Our reach goes beyond routing. We build, operate and partner on platforms that deliver measurable outcomes — from residential solar and C&amp;I funding to U.S. emergency services and tax-advantaged employee benefits. Here is a selection of the brands we have helped bring to life.</p>
         </div>
         <div class="showcase-grid reveal">
 
@@ -1726,7 +1783,7 @@
         <div class="section-head reveal">
           <span class="eyebrow accent">Our Partner Network</span>
           <h2 class="t">Vetted specialists. Exclusive mandates. Direct access.</h2>
-          <p class="lede">Every partner in our network is a specialist in their field — funders, EPCs, investment banks and business development engines. We connect your requirement to the partner whose mandate fits, and we step out of the way. Here are some of the partners we work with.</p>
+          <p class="lede">Every partner is a specialist in their field — funders, EPCs, investment banks and business development engines. We connect your requirement to the partner whose mandate fits, then step out of the way. Here are some of the partners we work with.</p>
         </div>
         <div class="partner-grid reveal">
 
@@ -2031,15 +2088,15 @@
         <div class="faq-list">
           <div class="faq-item reveal">
             <button class="faq-q" type="button" aria-expanded="false"><span>Where are you based, and can you work across US, EU and Asia hours?</span><span class="icon">▾</span></button>
-            <div class="faq-a"><p>Mariba Process operates across three theatres. US mandates run on US hours from our Oklahoma base. EU and Asia mandates run through our cross-border desk, with coverage matched to the counterparty’s working hours. The routing layer is the same in all three; only the time zone changes.</p></div>
+            <div class="faq-a"><p>Mariba Process operates across three theatres. US mandates run on US hours from our Oklahoma base. EU and Asia mandates run through our cross-border desk, matched to the counterparty's working hours. Same routing layer in all three; only the time zone changes.</p></div>
           </div>
           <div class="faq-item reveal">
-            <button class="faq-q" type="button" aria-expanded="false"><span>What does the guarantee cover, and what does “until fulfillment” mean?</span><span class="icon">▾</span></button>
-            <div class="faq-a"><p>The guarantee covers the routing process. In every market we operate — US, EU, Asia — supply and demand signals are guaranteed to exist and be readable; we do not open a market we cannot read. “Until fulfillment” means that if the first curated introduction does not reach fulfillment, we route again under the same agreement, at no additional fee, until the requirement is fulfilled or the brief is withdrawn. The guarantee does not cover the commercial outcome: terms, diligence and decisions remain with the counterparty.</p></div>
+            <button class="faq-q" type="button" aria-expanded="false"><span>What does the guarantee cover, and what does "until fulfillment" mean?</span><span class="icon">▾</span></button>
+            <div class="faq-a"><p>The guarantee covers the routing process. In every market we operate — US, EU, Asia — supply and demand signals are guaranteed to exist and be readable; we do not open a market we cannot read. "Until fulfillment" means that if the first curated introduction does not land, we route again under the same agreement, at no extra fee, until the requirement is fulfilled or the brief is withdrawn. Commercial outcomes remain with the counterparty.</p></div>
           </div>
           <div class="faq-item reveal">
-            <button class="faq-q" type="button" aria-expanded="false"><span>What does “two-way routing” mean in practice?</span><span class="icon">▾</span></button>
-            <div class="faq-a"><p>It means we read both sides of the market at once. When a demand signal is live, we route compliant capacity to it — funding, talent, supplies, bidders or buyers, whichever the requirement calls for. When compliant capacity is live, we route the demand signal to it. Most operators pick a side. We do not.</p></div>
+            <button class="faq-q" type="button" aria-expanded="false"><span>What does "two-way routing" mean in practice?</span><span class="icon">▾</span></button>
+            <div class="faq-a"><p>We read both sides of the market at once. When a demand signal is live, we route compliant capacity to it — funding, talent, supplies, bidders or buyers, whichever the requirement calls for. When compliant capacity is live, we route the demand signal to it. Most operators pick a side. We do not.</p></div>
           </div>
           <div class="faq-item reveal">
             <button class="faq-q" type="button" aria-expanded="false"><span>What do you actually route?</span><span class="icon">▾</span></button>
@@ -2047,7 +2104,7 @@
           </div>
           <div class="faq-item reveal">
             <button class="faq-q" type="button" aria-expanded="false"><span>How is this different from a broker, a headhunter or a lead-gen agency?</span><span class="icon">▾</span></button>
-            <div class="faq-a"><p>Brokers, headhunters and lead-gen agencies are each paid for activity inside one lane. We are paid for the routing decision that converts — in whichever direction the demand sits. We do not sell databases. We do not run funnels. We do not run contingent search. We research the market, match requirements to compliant capacity, and route one filtered introduction at a time. If the introduction does not produce a result, there is no success fee.</p></div>
+            <div class="faq-a"><p>Brokers, headhunters and lead-gen agencies are each paid for activity inside one lane. We are paid for the routing decision that converts — in whichever direction the demand sits. We do not sell databases. We do not run funnels. We do not run contingent search. We research the market, match requirements to compliant capacity, and route one filtered introduction at a time. If it does not produce a result, there is no success fee.</p></div>
           </div>
           <div class="faq-item reveal">
             <button class="faq-q" type="button" aria-expanded="false"><span>What is the myoProcess model, and how does Mariba Process differ?</span><span class="icon">▾</span></button>
@@ -2059,11 +2116,11 @@
           </div>
           <div class="faq-item reveal">
             <button class="faq-q" type="button" aria-expanded="false"><span>How do you get paid?</span><span class="icon">▾</span></button>
-            <div class="faq-a"><p>Three models. Fixed success fee upon fulfillment — agreed in advance, triggered when the routed introduction reaches fulfillment, no result no fee, with routing continued at no additional fee until fulfillment. Performance retainer — an ongoing routing mandate, credited against success fees, available on demand. Partnership — based on demand, negotiated per theatre. All fees are disclosed upfront and quoted in the currency of the theatre (USD, EUR or local).</p></div>
+            <div class="faq-a"><p>Three models. Fixed success fee upon fulfillment — agreed in advance, triggered when the routed introduction reaches fulfillment, no result no fee, with routing continued at no extra fee until fulfillment. Performance retainer — an ongoing routing mandate, credited against success fees, available on demand. Partnership — based on demand, negotiated per theatre. All fees are disclosed upfront and quoted in the currency of the theatre (USD, EUR or local).</p></div>
           </div>
           <div class="faq-item reveal">
             <button class="faq-q" type="button" aria-expanded="false"><span>What does it cost to start a conversation?</span><span class="icon">▾</span></button>
-            <div class="faq-a"><p>Nothing. There is no cost and no obligation to open a brief. We research the market and tell you plainly whether there is a filtered introduction to make. If there isn’t, we say so.</p></div>
+            <div class="faq-a"><p>Nothing. There is no cost and no obligation to open a brief. We research the market and tell you plainly whether there is a filtered introduction to make. If there isn't, we say so.</p></div>
           </div>
           <div class="faq-item reveal">
             <button class="faq-q" type="button" aria-expanded="false"><span>Do you guarantee results?</span><span class="icon">▾</span></button>
@@ -2074,16 +2131,16 @@
     </section>
 
     <!-- ============================================================
-         CTA
+         CTA — light
     ============================================================ -->
     <section class="cta-section" id="contact">
       <div class="wrap">
         <span class="eyebrow">Start a Conversation</span>
-        <h2 class="t">Tell us what you need routed.</h2>
+        <h2 class="t">Tell us what you need <i>routed.</i></h2>
         <p>One brief. We will tell you if there is a filtered introduction to make — and route it if there is. US hours from Oklahoma. Cross-border coverage across the EU and Asia. And we keep routing until fulfillment.</p>
         <div class="cta-actions">
           <a class="button-fill" href="mailto:victor@maribaprocess.com?subject=Introduction%20enquiry">Tell Us What You Need</a>
-          <a class="button-ghost" href="https://wa.me/27766473499?text=Hi%2C%20I'd%20like%20to%20speak%20to%20someone%20about%20a%20routing%20enquiry." target="_blank" rel="noopener" style="border-color:rgba(255,255,255,.22); color:#fff;">WhatsApp</a>
+          <a class="button-ghost" href="https://wa.me/27766473499?text=Hi%2C%20I'd%20like%20to%20speak%20to%20someone%20about%20a%20routing%20enquiry." target="_blank" rel="noopener">WhatsApp</a>
         </div>
         <p class="cta-note">A complete brief is best: who you are, the funding / talent / supply / bid / buyer requirement, and any standard documents. No cost. No obligation. Routing continues until fulfillment.</p>
       </div>
@@ -2118,7 +2175,7 @@
       <div class="legal">
         <p><strong>Disclaimer &amp; Compliance</strong></p>
         <p><strong>Mariba Process</strong> is a subsidiary of <strong>Mariba Media</strong> (South African Reg: 2024/132788/07). Mariba Process operates as a two-way strategic-introduction routing layer across the US, EU and Asia. It does not hold, process or transact any funds. It does not provide financial advice, intermediary services or any other regulated financial service as defined in the Financial Advisory and Intermediary Services Act (FAIS Act, 37 of 2002) or any equivalent US, EU or Asian financial-services regulation. All financial, recruitment and procurement services are rendered solely by the regulated counterparties within the network.</p>
-        <p>Mariba Process’s function is to research the market, match requirements to compliant capacity, and route qualified introductions to the relevant counterparty. The routing guarantee covers the routing process only: that supply and demand signals exist in every market Mariba Process operates, and that curated introductions continue until fulfillment or until the brief is withdrawn. The guarantee does not extend to commercial outcomes. All terms, diligence and decisions are the exclusive responsibility of the counterparty that engages with the client. No funding, hiring, procurement or commercial outcome is guaranteed.</p>
+        <p>Mariba Process's function is to research the market, match requirements to compliant capacity, and route qualified introductions to the relevant counterparty. The routing guarantee covers the routing process only: that supply and demand signals exist in every market Mariba Process operates, and that curated introductions continue until fulfillment or until the brief is withdrawn. The guarantee does not extend to commercial outcomes. All terms, diligence and decisions are the exclusive responsibility of the counterparty that engages with the client. No funding, hiring, procurement or commercial outcome is guaranteed.</p>
         <p><em>Last updated: 2026. All rights reserved.</em></p>
       </div>
     </div>
